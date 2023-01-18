@@ -1,4 +1,7 @@
-﻿namespace SpotifyPlaylistDownloader.Models.Common;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace SpotifyPlaylistDownloader.Models.Common;
 
 public class Result<T>
 {

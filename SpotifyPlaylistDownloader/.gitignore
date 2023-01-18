@@ -8,6 +8,8 @@ packages
 .vs
 .idea
 
+../.idea
+
 ### Executable ###
 *.app
 *.bat

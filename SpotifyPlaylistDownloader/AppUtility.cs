@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.IO;
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using SpotifyPlaylistDownloader.Models.Authentication;
 
@@ -28,7 +30,7 @@ public static class AppUtility
         
 
         var loadedAppSettings = JsonSerializer.Deserialize<AppSettings>(settingsFileJsonString);
-        //
+        
         // if (!IsSettingsJsonValid(settingsFileJsonString))
         //     loadedAppSettings = UpgradeConfigFile(loadedAppSettings);
             
