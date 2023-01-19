@@ -44,7 +44,8 @@ namespace SpotifyPlaylistDownloader
         private async Task AllPlaylists(SpotifyClient spotifyClient, HttpClient httpClient)
         {
             Console.WriteLine("Fetching all playlists");
-            var userPlaylists = await spotifyClient.GetUserPlaylists(httpClient, _settings.SpotifyApiCredentials.SpotifyUserId);
+            var spotifyUserId = _settings.SpotifyApiCredentials.SpotifyUserId;
+            var userPlaylists = await spotifyClient.GetUserPlaylists(httpClient, spotifyUserId);
             Console.WriteLine($"Found {userPlaylists.Count} playlists to download");
             var userPlaylistIds = userPlaylists.Select(x => x.Id).ToList();
 
@@ -60,7 +61,7 @@ namespace SpotifyPlaylistDownloader
                 Console.WriteLine($"Saving data...");
 
                 var appExportsDirectory = Path.Combine(AppUtility.GetAppDirectory(), "Exports");
-                var playlistExportDirectory = Path.Combine(appExportsDirectory, $"SpotifyBackup_{exportDateTime}");
+                var playlistExportDirectory = Path.Combine(appExportsDirectory, $"SpotifyBackup_{spotifyUserId}_{exportDateTime}");
                 var playlistDirectory = Path.Combine(playlistExportDirectory, playlistData.Name);
                 
                 SavePlaylistData(playlistDirectory, playlistData, playlistTracks, coverUrl);
