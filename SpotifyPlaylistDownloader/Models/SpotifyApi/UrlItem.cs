@@ -3,6 +3,6 @@
 public sealed class UrlItem
 {
     public string url { get; set; }
-    public string height { get; set; }
-    public string width { get; set; }
+    public int? height { get; set; }
+    public int? width { get; set; }
 }
