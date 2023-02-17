@@ -70,12 +70,14 @@ namespace SpotifyPlaylistDownloader
 
         private void SavePlaylistData(string playlistDirectory, Playlist playlistData, List<PlaylistTrack> playlistTracks, UrlItem coverUrl)
         {
-            if (!Directory.Exists(playlistDirectory))
+            var sanitisedDirectory = playlistDirectory.Replace(" ", "");
+            
+            if (!Directory.Exists(sanitisedDirectory))
             {
-                Directory.CreateDirectory(playlistDirectory);
+                Directory.CreateDirectory(sanitisedDirectory);
             }
 
-            var filePath = Path.Combine(playlistDirectory, "tracks.txt");
+            var filePath = Path.Combine(sanitisedDirectory, "tracks.txt");
             using (var fileStream = File.CreateText(filePath))
             {
                 foreach (var track in playlistTracks)
@@ -84,7 +86,7 @@ namespace SpotifyPlaylistDownloader
                 }
             }
 
-            var imageFilePath = Path.Combine(playlistDirectory, "coverimage.png");
+            var imageFilePath = Path.Combine(sanitisedDirectory, "coverimage.png");
             using (WebClient client = new WebClient())
             {
                 client.DownloadFile(new Uri(coverUrl.url), imageFilePath);
